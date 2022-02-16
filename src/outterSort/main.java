@@ -6,7 +6,7 @@ import java.util.List;
 
 
 public class main {
-    static final int maxSize = 3;//内存每次最多放1500000条记录
+    static final int maxSize = 1500;//内存每次最多放1500000条记录
     static final char[] maxKey = {255, 255, 255, 255, 255, 255, 255, 255, ','};
 
 
@@ -37,7 +37,7 @@ public class main {
                 line = bufr.readLine();
                 if (line == null)
                     break;
-                if (keyOf(line).compareTo(keyOf(heapArray[0])) > 0) {
+                if (Integer.parseInt(line)>Integer.parseInt(heapArray[0])) {
                     heapArray[0] = line;
                 } else {
                     heapArray[0] = heapArray[heapSize - 1];
@@ -101,9 +101,10 @@ public class main {
         int j = 2 * i + 1;
         String temp = heapArray[i];
         while (j < size) {
-            if (j < size - 1 && (keyOf(heapArray[j]).compareTo(keyOf(heapArray[j + 1]))) > 0)
+            if (j < size - 1 && Integer.parseInt(heapArray[j])>Integer.parseInt(heapArray[j + 1])){
                 ++j;
-            if (keyOf(temp).compareTo(heapArray[j]) > 0) {
+            }
+            if (Integer.parseInt(temp)>Integer.parseInt(heapArray[j])) {
                 heapArray[i] = heapArray[j];
                 i = j;
                 j = 2 * j + 1;
@@ -125,6 +126,7 @@ public class main {
             BufferedReader bufr = new BufferedReader(new FileReader(files.get(i)));
             rList.add(i, bufr);
             int j = 0;
+            //runs[i].buffer.length!=0
             while ((runs[i].buffer[j] = bufr.readLine()) != null) {
                 ++j;
                 if (j == length_per_run)
@@ -155,8 +157,9 @@ public class main {
             }
             if (runs[ls[0]].length == 0) {
                 liveRuns--;
-                String maxString = new String(maxKey);
-                maxString += "\n";
+                //String maxString = new String(maxKey);
+                String maxString="99999999";
+                //maxString += "\n";
                 runs[ls[0]].buffer[runs[ls[0]].index] = maxString;
             }
             adjust(ls, runs, ways, ls[0]);
@@ -186,7 +189,8 @@ public class main {
         while (t != 0) {
             if (s == -1)
                 break;
-            if (ls[t] == -1 || (keyOf(runs[s].buffer[runs[s].index]).compareTo(keyOf(runs[ls[t]].buffer[runs[ls[t]].index]))) > 0) {
+            if (ls[t] == -1 || Integer.parseInt(runs[s].buffer[runs[s].index])>Integer.parseInt(runs[ls[t]].buffer[runs[ls[t]].index])) {
+                //(ls[t] == -1 || (keyOf(runs[s].buffer[runs[s].index]).compareTo(keyOf(runs[ls[t]].buffer[runs[ls[t]].index]))) > 0)
                 temp = s;
                 s = ls[t];
                 ls[t] = temp;
@@ -198,7 +202,6 @@ public class main {
 
 
     static String keyOf(String str) {
-
         return str;
     }
 

@@ -12,6 +12,8 @@ public class test {
             outputFile.delete();
         main.test(inputFile,outputFile,tempFile);
         long end=System.currentTimeMillis();
-        System.out.println(end-start);
+        System.out.print("Total time usage: ");
+        System.out.print(String.format("%d",end-start));
+        System.out.print(" milliseconds");
     }
 }
